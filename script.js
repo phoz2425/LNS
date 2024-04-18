@@ -95,7 +95,7 @@ function startGame() {
             if (charIndex < currentItem.length) {
                 var container = document.querySelector('.container');
                 container.textContent = currentItem[charIndex];
-                container.style.color = 'white'();
+                container.style.color = 'white';
                 charIndex++;
             } else {
                 clearInterval(timer);
