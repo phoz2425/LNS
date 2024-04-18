@@ -5,8 +5,7 @@ var gameResults = {
     name: '',
     email: '',
     college: '',
-    correct: [],
-    wrong: []
+    answers: []
 };
 
 var correctAnswers = 0;
@@ -58,11 +57,12 @@ function showTextbox() {
             var answer = textbox.value.toUpperCase(); // Convert input to uppercase
 
             if (answer === currentItem.join('')) {
-                correctAnswers++;
-                gameResults.correct.push({level: level, item: item, answer: answer});
-            } else {
-                gameResults.wrong.push({level: level, item: item, answer: answer});
-            }
+    correctAnswers++;
+            gameResults.answers.push({level: level, item: item, answer: answer, correct: true});
+                } 
+           else {
+             gameResults.answers.push({level: level, item: item, answer: answer, correct: false});
+                }
 
             document.querySelector('.container').removeChild(textbox);
 
