@@ -31,7 +31,7 @@ body {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    background-color: #000000; /* Blue background */
+    background-color: #111111; /* Blue background */
     color: rgb(255, 255, 255); /* White text */
     cursor: pointer; /* Cursor changes to hand icon when over the button */
     margin-top: 20px; /* Space between the button and the container */
@@ -44,7 +44,7 @@ body {
 
 .container {
     /* Your existing styles for the square */
-    background-color: #000000; /* White background for the content */
+    background-color: #111111; /* White background for the content */
     color: #ffffff;
     border-radius: 25px; /* Rounded corners */
     padding: 20px;
