@@ -106,10 +106,11 @@ function startGame() {
         square.style.alignItems = 'center';
 
 var thankYouMessage = document.createElement('h1');
-thankYouMessage.textContent = 'THANK YOU!';
+thankYouMessage.textContent = 'Thank you for participating in our test!';
 thankYouMessage.style.color = 'white';
+thankYouMessage.style.textAlign = 'center'; // Add this line to center the text
 square.appendChild(thankYouMessage);
-        document.body.appendChild(square);
+document.body.appendChild(square);
     }
 }
     
