@@ -56,13 +56,17 @@ function checkAnswer(userAnswer, correctAnswer) {
     userAnswer = userAnswer.toUpperCase();
 
     // Split userAnswer into numbers and letters, sort them, and join them back
-    let userAnswerNumbers = userAnswer.match(/\d+/g).sort().join('');
-    let userAnswerLetters = userAnswer.match(/[a-zA-Z]+/g).sort().join('');
+    let userAnswerNumbers = userAnswer.match(/\d+/g);
+    userAnswerNumbers = userAnswerNumbers ? userAnswerNumbers.sort().join('') : '';
+    let userAnswerLetters = userAnswer.match(/[a-zA-Z]+/g);
+    userAnswerLetters = userAnswerLetters ? userAnswerLetters.sort().join('') : '';
     userAnswer = userAnswerNumbers + userAnswerLetters;
 
     // Split correctAnswer into numbers and letters, sort them, and join them back
-    let correctAnswerNumbers = correctAnswer.match(/\d+/g).sort().join('');
-    let correctAnswerLetters = correctAnswer.match(/[a-zA-Z]+/g).sort().join('');
+    let correctAnswerNumbers = correctAnswer.match(/\d+/g);
+    correctAnswerNumbers = correctAnswerNumbers ? correctAnswerNumbers.sort().join('') : '';
+    let correctAnswerLetters = correctAnswer.match(/[a-zA-Z]+/g);
+    correctAnswerLetters = correctAnswerLetters ? correctAnswerLetters.sort().join('') : '';
     correctAnswer = correctAnswerNumbers + correctAnswerLetters;
 
     if (userAnswer === correctAnswer) {
