@@ -78,7 +78,7 @@ function showTextbox() {
     var textbox = document.createElement('input');
     textbox.type = 'text';
     textbox.maxLength = currentItem.length;
-    textbox.style.color = 'white'; // Change text color to white
+    textbox.style.color = 'black'; // Change text color to black
     textbox.addEventListener('keyup', function(event) { // Change from 'keydown' to 'keyup'
         if (event.key === 'Enter') {
             var answer = textbox.value.toUpperCase();
@@ -99,7 +99,6 @@ function showTextbox() {
 
     document.querySelector('.container').appendChild(textbox);
 }
-
 
 function startGame() {
     if (level < levels.length) {
@@ -137,13 +136,12 @@ function startGame() {
         square.style.justifyContent = 'center';
         square.style.alignItems = 'center';
 
-
-var thankYouMessage = document.createElement('h1');
-thankYouMessage.textContent = 'Thank you for participating in our test!';
-thankYouMessage.style.color = 'purple'; // Change color to purple
-thankYouMessage.style.textAlign = 'center'; // Center the text
-square.appendChild(thankYouMessage);
-document.body.appendChild(square);
+        var thankYouMessage = document.createElement('h1');
+        thankYouMessage.textContent = 'Thank you for participating in our test!';
+        thankYouMessage.style.color = 'purple'; // Change color to purple
+        thankYouMessage.style.textAlign = 'center'; // Center the text
+        square.appendChild(thankYouMessage);
+        document.body.appendChild(square);
     }
 }
     
