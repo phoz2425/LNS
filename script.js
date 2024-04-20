@@ -21,6 +21,13 @@ var levels = [
     [['K', '4', '8', 'R', 'B', '2'], ['L', 'B', '3', '2', '6', 'J'], ['J', '2', '9', '5', 'L', 'G']]
 ];
 
+var theAnswers = [
+    ['2H', '6P'],
+    ['47O', '58K'],
+    ['37AZ', '27QW', '14DS'],
+    ['248BKR', '236BJL', '259GJL']
+];
+
 var currentItem;
 
 var firebaseConfig = {
@@ -51,29 +58,15 @@ function saveGameResults() {
         .catch((error) => console.error('Error saving game results: ', error));
 }
 
-function checkAnswer(userAnswer, correctAnswer) {
+function checkAnswer(userAnswer, level, item) {
     // Convert userAnswer to uppercase string
     userAnswer = userAnswer.toUpperCase();
 
-    // Convert correctAnswer to string
-    correctAnswer = correctAnswer.join('');
-
-    // Split userAnswer into numbers and letters, sort them, and join them back
-    let userAnswerNumbers = userAnswer.match(/\d+/g);
-    userAnswerNumbers = userAnswerNumbers ? userAnswerNumbers.sort().join('') : '';
-    let userAnswerLetters = userAnswer.match(/[a-zA-Z]+/g);
-    userAnswerLetters = userAnswerLetters ? userAnswerLetters.sort().join('') : '';
-    userAnswer = userAnswerNumbers + userAnswerLetters;
-
-    // Split correctAnswer into numbers and letters, sort them, and join them back
-    let correctAnswerNumbers = correctAnswer.match(/\d+/g);
-    correctAnswerNumbers = correctAnswerNumbers ? correctAnswerNumbers.sort().join('') : '';
-    let correctAnswerLetters = correctAnswer.match(/[a-zA-Z]+/g);
-    correctAnswerLetters = correctAnswerLetters ? correctAnswerLetters.sort().join('') : '';
-    correctAnswer = correctAnswerNumbers + correctAnswerLetters;
+    // Get the correct answer from theAnswers array
+    var correctAnswer = theAnswers[level][item];
 
     if (userAnswer === correctAnswer) {
-        gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true});
+        console.log("Correct answer");
     } else {
         gameResults.wrongAnswers.push({level: level, item: item, answer: userAnswer, correct: false});
     }
@@ -83,10 +76,10 @@ function showTextbox() {
     textbox.type = 'text';
     textbox.maxLength = currentItem.length;
     textbox.style.color = 'black'; // Change text color to black
-    textbox.addEventListener('keyup', function(event) { // Change from 'keydown' to 'keyup'
-        if (event.key === 'Enter') {
-            var answer = textbox.value.toUpperCase();
-            checkAnswer(answer, currentItem.slice()); // Use slice to create a copy of currentItem
+ textbox.addEventListener('keyup', function(event) {
+    if (event.key === 'Enter') {
+        var answer = textbox.value;
+        checkAnswer(answer, level, item);
 
             document.querySelector('.container').removeChild(textbox);
 
