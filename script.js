@@ -67,11 +67,12 @@ function checkAnswer(userAnswer, level, item) {
 
     if (userAnswer === correctAnswer) {
         console.log("Correct answer");
-        gameResults.correctAnswers.push(correctAnswer); // Add correct answer to gameResults
+        gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true}); // Add correct answer to gameResults
     } else {
         gameResults.wrongAnswers.push({level: level, item: item, answer: userAnswer, correct: false});
     }
 }
+
 function showTextbox() {
     var textbox = document.createElement('input');
     textbox.type = 'text';
