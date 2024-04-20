@@ -6,7 +6,7 @@ var gameResults = {
     email: '',
     college: '',
     answers: [],
-    coorectAnswers: [],
+    correctAnswers: [],
     wrongAnswers: [],
     correctItemCount: 0
 };
@@ -61,6 +61,9 @@ function checkAnswer(userAnswer, correctAnswer) {
     let userAnswerLetters = userAnswer.match(/[a-zA-Z]+/g);
     userAnswerLetters = userAnswerLetters ? userAnswerLetters.sort().join('') : '';
     userAnswer = userAnswerNumbers + userAnswerLetters;
+
+    // Convert the correctAnswer array to string
+    correctAnswer = correctAnswer.join('');
 
     // Split correctAnswer into numbers and letters, sort them, and join them back
     let correctAnswerNumbers = correctAnswer.match(/\d+/g);
