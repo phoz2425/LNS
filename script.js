@@ -62,9 +62,6 @@ function checkAnswer(userAnswer, correctAnswer) {
     userAnswerLetters = userAnswerLetters ? userAnswerLetters.sort().join('') : '';
     userAnswer = userAnswerNumbers + userAnswerLetters;
 
-    // Convert the correctAnswer array to string
-    correctAnswer = correctAnswer.join('');
-
     // Split correctAnswer into numbers and letters, sort them, and join them back
     let correctAnswerNumbers = correctAnswer.match(/\d+/g);
     correctAnswerNumbers = correctAnswerNumbers ? correctAnswerNumbers.sort().join('') : '';
@@ -78,7 +75,6 @@ function checkAnswer(userAnswer, correctAnswer) {
         gameResults.wrongAnswers.push({level: level, item: item, answer: userAnswer, correct: false});
     }
 }
-
 function showTextbox() {
     var textbox = document.createElement('input');
     textbox.type = 'text';
