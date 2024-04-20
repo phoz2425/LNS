@@ -78,8 +78,8 @@ function showTextbox() {
     var textbox = document.createElement('input');
     textbox.type = 'text';
     textbox.maxLength = currentItem.length;
-    textbox.style.color = 'white'; // Add this line to change the text color to white
-    textbox.addEventListener('keyup', function(event) {
+    textbox.style.color = 'white'; // Change text color to white
+    textbox.addEventListener('keyup', function(event) { // Change from 'keydown' to 'keyup'
         if (event.key === 'Enter') {
             var answer = textbox.value.toUpperCase();
             checkAnswer(answer, currentItem.slice()); // Use slice to create a copy of currentItem
@@ -118,7 +118,7 @@ function startGame() {
             if (charIndex < currentItem.length) {
                 var container = document.querySelector('.container');
                 container.textContent = currentItem[charIndex];
-                container.style.color = getRandomColor();
+                container.style.color = 'white'; // Change color to white
                 charIndex++;
             } else {
                 clearInterval(timer);
