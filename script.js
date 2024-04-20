@@ -52,11 +52,11 @@ function saveGameResults() {
 }
 
 function checkAnswer(userAnswer, correctAnswer) {
-    // Convert userAnswer to array, sort it, and join it back to string
-    userAnswer = userAnswer.split('').sort().join('');
+    // Convert userAnswer to uppercase string
+    userAnswer = userAnswer.toUpperCase();
 
-    // Sort the correctAnswer array and join it back to string
-    correctAnswer = correctAnswer.sort().join('');
+    // Convert the correctAnswer array to string
+    correctAnswer = correctAnswer.join('');
 
     if (userAnswer === correctAnswer) {
         gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true});
