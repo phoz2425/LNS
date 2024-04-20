@@ -55,8 +55,15 @@ function checkAnswer(userAnswer, correctAnswer) {
     // Convert userAnswer to uppercase string
     userAnswer = userAnswer.toUpperCase();
 
-    // Convert the correctAnswer array to string
-    correctAnswer = correctAnswer.join('');
+    // Split userAnswer into numbers and letters, sort them, and join them back
+    let userAnswerNumbers = userAnswer.match(/\d+/g).sort().join('');
+    let userAnswerLetters = userAnswer.match(/[a-zA-Z]+/g).sort().join('');
+    userAnswer = userAnswerNumbers + userAnswerLetters;
+
+    // Split correctAnswer into numbers and letters, sort them, and join them back
+    let correctAnswerNumbers = correctAnswer.match(/\d+/g).sort().join('');
+    let correctAnswerLetters = correctAnswer.match(/[a-zA-Z]+/g).sort().join('');
+    correctAnswer = correctAnswerNumbers + correctAnswerLetters;
 
     if (userAnswer === correctAnswer) {
         gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true});
@@ -119,6 +126,12 @@ function startGame() {
     } else {
         saveGameResults();
         document.body.innerHTML = '';
+        document.body.style.display = 'flex';
+        document.body.style.justifyContent = 'center';
+        document.body.style.alignItems = 'center';
+        document.body.style.height = '100vh';
+        document.body.style.margin = '0';
+
         var square = document.createElement('div');
         square.style.width = '200px';
         square.style.height = '200px';
@@ -129,8 +142,8 @@ function startGame() {
 
         var thankYouMessage = document.createElement('h1');
         thankYouMessage.textContent = 'Thank you for participating in our test!';
-        thankYouMessage.style.color = 'white'; // Change color to purple
-        thankYouMessage.style.textAlign = 'center'; // Center the text
+        thankYouMessage.style.color = 'white'; 
+        thankYouMessage.style.textAlign = 'center'; 
         square.appendChild(thankYouMessage);
         document.body.appendChild(square);
     }
