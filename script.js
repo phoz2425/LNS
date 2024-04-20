@@ -5,7 +5,10 @@ var gameResults = {
     name: '',
     email: '',
     college: '',
-    answers: []
+    answers: [],
+    coorectAnswers: [],
+    wrongAnswers: [],
+    correctItemCount: 0
 };
 
 var correctAnswers = 0;
@@ -32,12 +35,44 @@ var firebaseConfig = {
 
 var database;
 
+function getRandomColor() {
+    var letters = '0123456789ABCDEF';
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
+
 function saveGameResults() {
     var gameResultsRef = ref(database, 'gameResults/');
     push(gameResultsRef, gameResults)
         .then(() => console.log('Game results saved successfully.'))
         .catch((error) => console.error('Error saving game results: ', error));
 }
+
+function checkAnswer(userAnswer, correctAnswer) {
+    correctAnswer.sort((a, b) => {
+        if (isNaN(a) && isNaN(b)) {
+            return a.localeCompare(b);
+        }
+        if (isNaN(a)) {
+            return 1;
+        }
+        if (isNaN(b)) {
+            return -1;
+        }
+        return a - b;
+    });
+
+    if (userAnswer === correctAnswer.join('')) {
+        gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true});
+        gameResults.correctItemCount++; // Increment the correct item count
+    } else {
+        gameResults.wrongAnswers.push({level: level, item: item, answer: userAnswer, correct: false});
+    }
+}
+
 
 function showTextbox() {
     var textbox = document.createElement('input');
@@ -46,12 +81,7 @@ function showTextbox() {
     textbox.addEventListener('keydown', function(event) {
         if (event.key === 'Enter') {
             var answer = textbox.value.toUpperCase();
-            if (answer === currentItem.join('')) {
-    correctAnswers++;
-    gameResults.answers.push({level: level, item: item, answer: answer, correct: true});
-} else {
-    gameResults.answers.push({level: level, item: item, answer: answer, correct: false});
-}
+            checkAnswer(answer, currentItem.slice()); // Use slice to create a copy of currentItem
 
             document.querySelector('.container').removeChild(textbox);
 
@@ -68,6 +98,7 @@ function showTextbox() {
 
     document.querySelector('.container').appendChild(textbox);
 }
+
 
 function startGame() {
     if (level < levels.length) {
@@ -86,7 +117,7 @@ function startGame() {
             if (charIndex < currentItem.length) {
                 var container = document.querySelector('.container');
                 container.textContent = currentItem[charIndex];
-                container.style.color = 'white';
+                container.style.color = getRandomColor();
                 charIndex++;
             } else {
                 clearInterval(timer);
@@ -105,10 +136,11 @@ function startGame() {
         square.style.justifyContent = 'center';
         square.style.alignItems = 'center';
 
+
 var thankYouMessage = document.createElement('h1');
 thankYouMessage.textContent = 'Thank you for participating in our test!';
-thankYouMessage.style.color = 'white';
-thankYouMessage.style.textAlign = 'center'; // Add this line to center the text
+thankYouMessage.style.color = 'purple'; // Change color to purple
+thankYouMessage.style.textAlign = 'center'; // Center the text
 square.appendChild(thankYouMessage);
 document.body.appendChild(square);
     }
