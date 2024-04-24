@@ -8,7 +8,8 @@ var gameResults = {
     answers: [],
     correctAnswers: [],
     wrongAnswers: [],
-    correctItemCount: 0
+    correctItemCount: 0,
+    gameCode: ''
 };
 
 var correctAnswers = 0;
@@ -126,6 +127,7 @@ function startGame() {
             }
         }, 1000);
     } else {
+        gameResults.gameCode = "BNW";
         saveGameResults();
         document.body.innerHTML = '';
         document.body.style.display = 'flex';
