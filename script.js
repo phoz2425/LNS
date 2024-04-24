@@ -8,7 +8,8 @@ var gameResults = {
     answers: [],
     correctAnswers: [],
     wrongAnswers: [],
-    correctItemCount: 0
+    correctItemCount: 0,
+    correctCount: 0
 };
 
 var correctAnswers = 0;
@@ -68,6 +69,7 @@ function checkAnswer(userAnswer, level, item) {
     if (userAnswer === correctAnswer) {
         console.log("Correct answer");
         gameResults.correctAnswers.push({level: level, item: item, answer: userAnswer, correct: true}); // Add correct answer to gameResults
+        gameResults.correctCount++; // Increment correctCount
     } else {
         gameResults.wrongAnswers.push({level: level, item: item, answer: userAnswer, correct: false});
     }
