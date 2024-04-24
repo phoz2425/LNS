@@ -8,7 +8,7 @@ var gameResults = {
     answers: [],
     correctAnswers: [],
     wrongAnswers: [],
-    correctItemCount: 0;
+    correctItemCount: 0
 };
 
 var correctAnswers = 0;
